@@ -24,6 +24,10 @@
             margin: 0 5px;
             width: 80px;
         }
+        .score-div, .level-div {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -31,15 +35,27 @@
         <!-- canvas 默认高度 150px, 默认宽度 300px -->
         <canvas id="game-area" width="400" height="800">请在谷歌浏览器中开始游戏</canvas>
         <div>
-            <div class='score'>游戏得分：0</div>
-            <div class='level'>游戏等级：0</div>
+            <div class='score-div'>
+                <div class='score-text'>游戏得分：</div>
+                <div class='score'>0</div>
+            </div>
+            <div class='level-div'>
+                <div class='level-text'>游戏等级：</div>
+                <div class='level'>0</div>
+            </div>
         </div>
     </div>
     <div class='buttons'>
         <button class='btn start-btn' onclick="startGame()">start</button>
         <button class='btn pause-btn'>pause</button>
     </div>
+    <script src="utils.js"></script>
     <script src="framework.js"></script>
+    <script src="gameplay.js"></script>
     <script src="index.js"></script>
+
+    <script>
+       
+    </script>
 </body>
 </html>
