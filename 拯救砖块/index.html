@@ -5,8 +5,86 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>拯救砖块</title>
+  <style>
+    #canvas {
+      border: 1px solid gray;
+    }
+
+  </style>
 </head>
 <body>
+  <canvas id="canvas" width="1000" height="300"></canvas>
+
+  <script>
+    let canvas = document.querySelector('#canvas')
+    let ctx = canvas.getContext('2d')
+    let x = 100
+    let y = 100
+
+    let leftPressed = false
+    let rightPressed = false
+    
+    let timer = null
+    
+    
+
+    function drawImage() {
+      let img = new Image()
+      img.src = '../assets/paddle.png';
+      img.onload = function(){
+        // 在画布 (x, y) 处画挡板
+        ctx.drawImage(img, x, y);
+      }
+    }
+
+    document.addEventListener('keydown', event => {
+      console.log('event')
+      if (event.key === 'a') {
+        // 挡板往左
+        leftPressed = true
+        
+        timer = setInterval (function(){
+          console.log('interval')
+          ctx.clearRect(x, y, canvas.width, canvas.height)
+          x -= 10
+          x = x >= 0? x : 0
+          drawImage()
+        }, 1000/30)
+        
+      } else if (event.key === 'd') {
+        // 往右
+        rightPressed = true
+
+        timer = setInterval(function(){
+          ctx.clearRect(x, y, canvas.width, canvas.height)
+        x += 10
+        x = x <= canvas.width - 200? x : canvas.width - 200
+        drawImage()
+        }, 1000/30)
+      }
+    })
+
+    document.addEventListener('keyup', event => {
+      if (event.key === 'a') {
+        leftPressed = false
+        clearInterval(timer)
+        timer = null
+      } else if (event.key === 'd') {
+        rightPressed = false
+        clearInterval(timer)
+        timer = null
+      }
+    })
+
+    function main() {
+      drawImage()
+    }
+
+    main()
+
+
+
+  </script>
   
 </body>
 </html>
