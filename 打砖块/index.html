@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拯救砖块</title>
+  <style>
+    #canvas {
+      border: 1px solid gray;
+    }
+
+  </style>
+  <script src="utils.js"></script>
+  <script src="./game.js"></script>
+  <script src="./Paddle.js"></script>
+  <script src="./Block.js"></script>
+  <script src="./Ball.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="1000" height="500"></canvas>
+
+  <script>
+
+    // 待添加功能：暂停、关卡、调节帧率
+    function main () {
+      var g = Game(40)
+      var paddle = Paddle()
+      var ball = Ball()
+
+      var blocks = []
+      for (let i = 0; i < 4; i++) {
+        let b = Block()
+        b.x = (i + 1) * 150
+        b.y = 100
+        blocks.push(b)
+      }
+      
+      g.update = function () {
+        // 判断相撞
+        if (paddle.collide(ball)) {
+          ball.rebound()
+        }
+        for (let i = 0; i < blocks.length; i++) {
+          let b = blocks[i]
+          if(b.collide(ball)) {
+            console.log('b.collide(ball)', b.collide(ball))
+            b.killed()
+            ball.rebound()
+         }
+        }
+        ball.move()
+      }
+      g.draw = function () {
+        // draw paddle
+        g.drawImg(paddle)
+        // draw ball
+        g.drawImg(ball)
+        // draw blocks
+        for(let i = 0; i < blocks.length; i++) {
+          let b = blocks[i]
+          if (b.alive) {
+            g.drawImg(b)
+          }
+        }
+      }
+      // 注册按键事件
+      g.register ('a', function () {
+        paddle.moveLeft()
+      })
+      g.register ('d', function () {
+        paddle.moveRight()
+      })
+      g.register ('f', function () {
+        ball.fire()
+      })
+    }
+
+    main()
+  </script>
+  
+</body>
+</html>
