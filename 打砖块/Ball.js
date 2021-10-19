@@ -2,7 +2,7 @@ const Ball = function () {
     let img = imgFromPath('../assets/ball.png')
     let o = {
       img,
-      x: 100,
+      x: 150,
       y: 350,
       speedX: 4,
       speedY: 4,

@@ -1,4 +1,3 @@
-
 const Paddle = function () {
     let img = imgFromPath('../assets/paddle.png')
     let o = {
@@ -8,12 +7,7 @@ const Paddle = function () {
       speed: 10,
     }
     o.collide = function(ball) {
-     if (ball.y + ball.img.height > o.y) {
-       if (ball.x > o.x && ball.x < o.x + o.img.width) {
-         return true
-       }
-     }
-      return false
+    return rectIntersects(o, ball)
     }
     o.moveLeft = function () {
       o.x -= o.speed
