@@ -1,7 +1,7 @@
-const Game = function (fps) {
+const Game = function () {
     let g = {
       actions: {},
-      keydowns: {}
+      keydowns: {},
     }
     
     g.canvas = document.querySelector('#canvas')
@@ -19,13 +19,18 @@ const Game = function (fps) {
 
     // events
     document.addEventListener('keydown', event => {
+      console.log('keyup', event)
       g.keydowns[event.key] = true
     })
     document.addEventListener('keyup', event => {
       g.keydowns[event.key] = false
     })
     
-    setInterval(function(){
+    const runLoop = function () {
+      if (window.pause) {
+        return
+      }
+      console.log('window.fps', window.fps)
       // events
       let keys = Object.keys(g.actions)
       keys.forEach(k => {
@@ -39,7 +44,36 @@ const Game = function (fps) {
       g.update()
       // draw
       g.draw()
-   }, 1000/fps)
+
+      setTimeout(() => {
+        runLoop()
+      }, 1000 / window.fps)
+    }
+  
+  // 用 setTimeout + runLoop 代替 setInterval, 控制帧率
+  setTimeout(() => {
+    runLoop()
+  }, 1000 / window.fps)
+
+  //   setInterval(function(){
+  //     if (window.pause) {
+  //       return
+  //     }
+  //     console.log('window.fps', window.fps)
+  //     // events
+  //     let keys = Object.keys(g.actions)
+  //     keys.forEach(k => {
+  //       if (g.keydowns[k]) {
+  //         g.actions[k]()
+  //       }
+  //     })
+  //     // clear
+  //     g.clear()
+  //     // update
+  //     g.update()
+  //     // draw
+  //     g.draw()
+  //  }, 1000/30)
 
    return g
   } 

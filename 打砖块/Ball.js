@@ -12,9 +12,9 @@ const Ball = function () {
       console.log('fire')
       o.fiered = true
     }
+    
     o.move = function () {
       if (o.fiered) {
-      console.log('ball move')
         if (o.x < 0 || o.x > 980) {
           o.speedX = -o.speedX
         }
