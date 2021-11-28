@@ -1,7 +1,8 @@
-const Game = function () {
+const Game = function (allImgPath) {
     let g = {
       actions: {},
       keydowns: {},
+      imgs: {}
     }
     
     g.canvas = document.querySelector('#canvas')
@@ -13,13 +14,16 @@ const Game = function () {
     g.drawImg = function (image) {
       g.ctx.drawImage(image.img, image.x, image.y)
     }
+    g.drawScore = function (scroe) {
+      g.ctx.font = "16px serif";
+      g.ctx.fillText(scroe, 10, g.canvas.height - 20)
+    }
     g.clear = function () {
       g.ctx.clearRect(0, 0, g.canvas.width, g.canvas.height)
     }
 
     // events
     document.addEventListener('keydown', event => {
-      console.log('keyup', event)
       g.keydowns[event.key] = true
     })
     document.addEventListener('keyup', event => {
@@ -27,53 +31,58 @@ const Game = function () {
     })
     
     const runLoop = function () {
-      if (window.pause) {
-        return
+      if (!window.pause) {
+        // events
+        let keys = Object.keys(g.actions)
+        keys.forEach(k => {
+          if (g.keydowns[k]) {
+            g.actions[k]()
+          }
+        })
+        // clear
+        g.clear()
+        // update
+        g.update()
+        // draw
+        g.draw()
       }
-      console.log('window.fps', window.fps)
-      // events
-      let keys = Object.keys(g.actions)
-      keys.forEach(k => {
-        if (g.keydowns[k]) {
-          g.actions[k]()
-        }
-      })
-      // clear
-      g.clear()
-      // update
-      g.update()
-      // draw
-      g.draw()
-
       setTimeout(() => {
         runLoop()
       }, 1000 / window.fps)
     }
-  
-  // 用 setTimeout + runLoop 代替 setInterval, 控制帧率
-  setTimeout(() => {
-    runLoop()
-  }, 1000 / window.fps)
+  // 预载入图片
+  var imgCount = 0
+  let imgKeys = Object.keys(allImgPath)
+  for(let i = 0; i < imgKeys.length; i++) {
+    let name = imgKeys[i]
+    let path = allImgPath[name]
+    let img = new Image()
+    img.src = path
+    img.onload = function () {
+      imgCount += 1
+      g.imgs[name] = img
+      if (imgCount === imgKeys.length) {
+        //所有图片加载完成
+        g.ready()
+        g.run()
+      }
+    }
+  }
+  g.imgByName = function (name) {
+    let img = g.imgs[name]
+    let image = {
+      img,
+      w: img.width,
+      h: img.height
+    }
+    return image
+  }
 
-  //   setInterval(function(){
-  //     if (window.pause) {
-  //       return
-  //     }
-  //     console.log('window.fps', window.fps)
-  //     // events
-  //     let keys = Object.keys(g.actions)
-  //     keys.forEach(k => {
-  //       if (g.keydowns[k]) {
-  //         g.actions[k]()
-  //       }
-  //     })
-  //     // clear
-  //     g.clear()
-  //     // update
-  //     g.update()
-  //     // draw
-  //     g.draw()
-  //  }, 1000/30)
-
+  // 开始运行game
+  g.run = function () {
+    setTimeout(() => {
+      runLoop()
+    }, 1000 / window.fps)
+  }
    return g
   } 

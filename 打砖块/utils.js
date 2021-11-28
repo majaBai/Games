@@ -12,3 +12,11 @@ var imgFromPath = function (path) {
     if (x1 + a.img.width < x2 || x1 > x2 + b.img.width) return false
     return true
   }
+
+  var log = console.log.bind(console)
+  var e = sel => document.querySelector(sel)
+  // var log = function (s) {
+  //   const textArea = e("#log-area")
+  //   textArea.value += '\n' + s
+  // }
+

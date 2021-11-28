@@ -1,15 +1,21 @@
-const Ball = function () {
-    let img = imgFromPath('../assets/ball.png')
-    let o = {
-      img,
-      x: 150,
-      y: 350,
-      speedX: 4,
-      speedY: 4,
-      fiered: false
-    }
+const Ball = function (g) {
+    // let img = imgFromPath('../assets/ball.png')
+    let o = g.imgByName('ball')
+    // let o = {
+    //   img,
+    //   x: 150,
+    //   y: 350,
+    //   speedX: 4,
+    //   speedY: 4,
+    //   fiered: false
+    // }
+    o.x = 150
+    o.y = 350
+    o.speedX = 4
+    o.speedY = 4
+    o.fiered = false
     o.fire = function () {
-      console.log('fire')
+      log('fire')
       o.fiered = true
     }
     
