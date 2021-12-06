@@ -18,6 +18,11 @@ const Game = function (allImgPath) {
       g.ctx.font = "16px serif";
       g.ctx.fillText(scroe, 10, g.canvas.height - 20)
     }
+    g.drawBk = function () {
+      const img = g.imgByName('bk').img
+      // g.ctx.createPattern(img, "no-repeat")
+      g.ctx.drawImage(img, 0, 0, g.canvas.width, g.canvas.height)
+    }
     g.clear = function () {
       g.ctx.clearRect(0, 0, g.canvas.width, g.canvas.height)
     }
@@ -31,6 +36,7 @@ const Game = function (allImgPath) {
     })
     
     const runLoop = function () {
+      console.log('runloop')
       if (!window.pause) {
         // events
         let keys = Object.keys(g.actions)
@@ -76,6 +82,15 @@ const Game = function (allImgPath) {
       h: img.height
     }
     return image
+  }
+
+  // 拖拽小球
+  g.shiftBall = function () {
+    g.clear()
+    // update
+    g.update()
+    // draw
+    g.draw()
   }
 
   // 开始运行game

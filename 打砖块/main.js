@@ -37,7 +37,8 @@ function main () {
   var allImgPath = { 
     block: '../assets/block.png', 
     ball: '../assets/ball.png', 
-    paddle: '../assets/paddle.png'
+    paddle: '../assets/paddle.png',
+    bk: '../assets/bk.jfif'
   }
   g = Game(allImgPath)
   g.ready = function() {
@@ -61,6 +62,8 @@ function main () {
       ball.move()
     }
     g.draw = function () {
+      // draw background
+      g.drawBk()
       // draw paddle
       g.drawImg(paddle)
       // draw ball
@@ -84,6 +87,28 @@ function main () {
     })
     g.register ('f', function () {
       ball.fire()
+    })
+
+    // 拖拽小球
+    let canDragBall = false
+    g.canvas.addEventListener('mousedown', function(e) {
+      let x = e.offsetX
+      let y = e.offsetY
+      if (ball.hasPoint(x, y)) {
+        canDragBall = true
+      }
+    })
+    g.canvas.addEventListener('mousemove', function(e) {
+      let x = e.offsetX
+      let y = e.offsetY
+      if (canDragBall) {
+        ball.x = x
+        ball.y = y
+        g.shiftBall()
+      }
+    })
+    g.canvas.addEventListener('mouseup', function(e) {
+      canDragBall = false
     })
   }
 }
