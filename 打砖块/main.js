@@ -31,8 +31,6 @@ function main () {
   window.pause = false
   window.fps = 10
   window.level = 1
-  var score  = 0
-
   // 游戏所需的所有图片
   var allImgPath = { 
     block: '../assets/block.png', 
@@ -40,76 +38,11 @@ function main () {
     paddle: '../assets/paddle.png',
     bk: '../assets/bk.jfif'
   }
-  g = Game(allImgPath)
+  g = Game(allImgPath) // 加载游戏所需的图片资源
   g.ready = function() {
-    paddle = Paddle(g)
-    ball = Ball(g)
-    blocks = loadBlocks()
-
-    g.update = function () {
-      // 判断相撞
-      if (paddle.collide(ball)) {
-        ball.rebound()
-      }
-      for (let i = 0; i < blocks.length; i++) {
-        let b = blocks[i]
-        if(b.collide(ball)) {
-          b.killed()
-          score += 100
-          ball.rebound()
-       }
-      }
-      ball.move()
-    }
-    g.draw = function () {
-      // draw background
-      g.drawBk()
-      // draw paddle
-      g.drawImg(paddle)
-      // draw ball
-      g.drawImg(ball)
-      // draw blocks
-      for(let i = 0; i < blocks.length; i++) {
-        let b = blocks[i]
-        if (b.alive) {
-          g.drawImg(b)
-        }
-      }
-      // 显示分数
-      g.drawScore(`得分: ${score}`)
-    }
-    // 注册按键事件
-    g.register ('a', function () {
-      paddle.moveLeft()
-    })
-    g.register ('d', function () {
-      paddle.moveRight()
-    })
-    g.register ('f', function () {
-      ball.fire()
-    })
-
-    // 拖拽小球
-    let canDragBall = false
-    g.canvas.addEventListener('mousedown', function(e) {
-      let x = e.offsetX
-      let y = e.offsetY
-      if (ball.hasPoint(x, y)) {
-        canDragBall = true
-      }
-    })
-    g.canvas.addEventListener('mousemove', function(e) {
-      let x = e.offsetX
-      let y = e.offsetY
-      if (canDragBall) {
-        ball.x = x
-        ball.y = y
-        g.shiftBall()
-      }
-    })
-    g.canvas.addEventListener('mouseup', function(e) {
-      canDragBall = false
-    })
+    const s = scene(g) // 初始化场景
+    console.log('初始化场景', s)
+    g.start(s) // 开始游戏
   }
 }
 

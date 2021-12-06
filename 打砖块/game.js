@@ -2,8 +2,9 @@ const Game = function (allImgPath) {
     let g = {
       actions: {},
       keydowns: {},
-      imgs: {}
+      imgs: {},
     }
+    let scene = null // 场景
     
     g.canvas = document.querySelector('#canvas')
     g.ctx = canvas.getContext('2d')
@@ -18,6 +19,11 @@ const Game = function (allImgPath) {
       g.ctx.font = "16px serif";
       g.ctx.fillText(scroe, 10, g.canvas.height - 20)
     }
+    g.drawEndTip = function (text) {
+      g.ctx.font = "bold 32px serif";
+      g.ctx.textAlign = "center";
+      g.ctx.fillText(text, g.canvas.width / 2, g.canvas.height / 2)
+    }
     g.drawBk = function () {
       const img = g.imgByName('bk').img
       // g.ctx.createPattern(img, "no-repeat")
@@ -25,6 +31,17 @@ const Game = function (allImgPath) {
     }
     g.clear = function () {
       g.ctx.clearRect(0, 0, g.canvas.width, g.canvas.height)
+    }
+    g.update = function () {
+      scene.update()
+    }
+    g.draw = function () {
+      scene.draw()
+    }
+   
+
+    g.end = function () {
+      scene = sceneEnd(g)
     }
 
     // events
@@ -36,7 +53,7 @@ const Game = function (allImgPath) {
     })
     
     const runLoop = function () {
-      console.log('runloop')
+      console.log('runloop', window.pause)
       if (!window.pause) {
         // events
         let keys = Object.keys(g.actions)
@@ -70,7 +87,7 @@ const Game = function (allImgPath) {
       if (imgCount === imgKeys.length) {
         //所有图片加载完成
         g.ready()
-        g.run()
+        // g.run()
       }
     }
   }
@@ -94,10 +111,14 @@ const Game = function (allImgPath) {
   }
 
   // 开始运行game
-  g.run = function () {
-    setTimeout(() => {
-      runLoop()
-    }, 1000 / window.fps)
+  g.start= function (s) {
+    scene = s
+    runLoop()
+
+    // setTimeout(() => {
+    //   scene = s
+    //   runLoop()
+    // }, 1000 / window.fps)
   }
    return g
   } 
