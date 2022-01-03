@@ -1,36 +1,56 @@
+function loadBlocks() {
+  let l = window.level
+  let blocks = []
+  for (let i = 0; i < Level[l - 1].length; i++) {
+    let b = Block(Level[l - 1][i], g)
+    blocks.push(b)
+  }
+  return blocks
+}
 class SceneStart extends Scene {
   constructor (g) {
     super(g)
-    score  = 0
-    paddle = Paddle(g)
-    ball = Ball(g)
-    blocks = loadBlocks()
+    this.score  = 0
+    this.paddle = Paddle(g)
+    this.ball = Ball(g)
+    this.blocks = loadBlocks()
     // 注册按键事件
-   g.register ('a', function () {
-      paddle.moveLeft()
+    g.register ('a', () => {
+      this.paddle.moveLeft()
     })
-   g.register ('d', function () {
-      paddle.moveRight()
+    g.register ('d', () => {
+      this.paddle.moveRight()
     })
-    g.register ('f', function () {
-      console.log('press f',ball)
-      ball.fire()
+    g.register ('f', () => {
+      this.ball.fire()
+    })
+    window.addEventListener('keydown', event => {
+      // 暂停游戏
+      if (event.code === 'Space') {
+        window.pause = !window.pause
+        log('window.pause', window.pause)
+      }
+      // 更换关卡
+      if('123'.includes(event.key)) {
+        window.level = Number(event.key)
+        this.blocks = loadBlocks()
+      }
     })
      // 拖拽小球
      let canDragBall = false
-    g.canvas.addEventListener('mousedown', function(e) {
+    g.canvas.addEventListener('mousedown', e => {
        let x = e.offsetX
        let y = e.offsetY
-       if (ball.hasPoint(x, y)) {
+       if (this.ball.hasPoint(x, y)) {
          canDragBall = true
        }
      })
-    g.canvas.addEventListener('mousemove', function(e) {
+    g.canvas.addEventListener('mousemove', e => {
        let x = e.offsetX
        let y = e.offsetY
        if (canDragBall) {
-         ball.x = x
-         ball.y = y
+         this.ball.x = x
+         this.ball.y = y
          g.shiftBall()
        }
      })
@@ -40,40 +60,40 @@ class SceneStart extends Scene {
   }
 
   update () {
-    if (ball.y > paddle.y) {
+    if (this.ball.y > this.paddle.y) {
       const s = new SceneEnd(g)
       g.replaceScene(s)
        return
     }
-    if (paddle.collide(ball)) {
-        ball.rebound()
+    if (this.paddle.collide(this.ball)) {
+        this.ball.rebound()
     }
-    for (let i = 0; i < blocks.length; i++) {
-    let b = blocks[i]
-    if(b.collide(ball)) {
+    for (let i = 0; i < this.blocks.length; i++) {
+    let b = this.blocks[i]
+    if(b.collide(this.ball)) {
         b.killed()
-        score += 100
-        ball.rebound()
+        this.score += 100
+        this.ball.rebound()
     }
     }
-    ball.move()
+    this.ball.move()
   }
   draw () {
     // draw background
    g.drawBk()
     // draw paddle
-   g.drawImg(paddle)
+   g.drawMaterial(this.paddle)
     // draw ball
-    g.drawImg(ball)
+    g.drawMaterial(this.ball)
     // draw blocks
-    for(let i = 0; i < blocks.length; i++) {
-      let b = blocks[i]
+    for(let i = 0; i < this.blocks.length; i++) {
+      let b = this.blocks[i]
       if (b.alive) {
-        g.drawImg(b)
+        g.drawMaterial(b)
       }
     }
     // 显示分数
-    g.drawScore(`得分: ${score}`)
+    g.drawScore(`得分: ${this.score}`)
   }
   
 }

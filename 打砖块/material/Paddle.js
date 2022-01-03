@@ -19,7 +19,7 @@ const Paddle = function (g) {
     }
     o.moveRight = function () {
       o.x += o.speed
-      o.x = o.x <= canvas.width - 165? o.x : canvas.width - 165
+      o.x = o.x <= canvas.width - 63? o.x : canvas.width - 63
     }
     return o
   }
