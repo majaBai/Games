@@ -17,11 +17,14 @@ const Game = function (allImgPath) {
     }
     g.drawScore = function (scroe) {
       g.ctx.font = "16px serif";
-      g.ctx.fillText(scroe, 10, g.canvas.height - 20)
+      g.ctx.fillStyle = 'white'
+      g.ctx.textAlign = 'center'
+      g.ctx.fillText(scroe, 50, g.canvas.height - 20)
     }
-    g.drawEndTip = function (text) {
+    g.drawTip = function (text) {
       g.ctx.font = "bold 32px serif";
-      g.ctx.textAlign = "center";
+      g.ctx.fillStyle = 'white'
+      g.ctx.textAlign = 'center'
       g.ctx.fillText(text, g.canvas.width / 2, g.canvas.height / 2)
     }
     g.drawBk = function () {
@@ -38,10 +41,9 @@ const Game = function (allImgPath) {
     g.draw = function () {
       scene.draw()
     }
-   
-
-    g.end = function () {
-      scene = sceneEnd(g)
+    
+    g.replaceScene = function (s) {
+      scene = s
     }
 
     // events

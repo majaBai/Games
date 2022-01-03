@@ -27,20 +27,25 @@ window.addEventListener('keydown', event => {
     }
   })
 
+var blocks
+var paddle
+var ball
+var blocks
+var score
 function main () {
   window.pause = false
-  window.fps = 10
-  window.level = 1
+  window.fps = 30 // 小球速度
+  window.level = 1 // 游戏关卡
   // 游戏所需的所有图片
   var allImgPath = { 
     block: '../assets/block.png', 
     ball: '../assets/ball.png', 
     paddle: '../assets/paddle.png',
-    bk: '../assets/bk.jfif'
+    bk: '../assets/bk.png'
   }
   g = Game(allImgPath) // 加载游戏所需的图片资源
   g.ready = function() {
-    const s = scene(g) // 初始化场景
+    const s = new SceneTitle(g) // 初始化场景
     console.log('初始化场景', s)
     g.start(s) // 开始游戏
   }
