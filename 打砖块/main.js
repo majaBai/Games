@@ -45,7 +45,8 @@ function main () {
   }
   g = Game(allImgPath) // 加载游戏所需的图片资源
   g.ready = function() {
-    const s = new SceneTitle(g) // 初始化场景
+    // const s = new SceneTitle(g)
+    const s = SceneTitle.new(g) // 初始化场景
     console.log('初始化场景', s)
     g.start(s) // 开始游戏
   }
