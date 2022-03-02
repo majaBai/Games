@@ -13,7 +13,7 @@ function main () {
     block: '../assets/block.png', 
     ball: '../assets/ball.png', 
     paddle: '../assets/paddle.png',
-    bk: '../assets/bk.png'
+    bk: '../assets/sky.jpeg'
   }
   // g = new Game(allImgPath)
   g = Game.instance(allImgPath) // 单例
