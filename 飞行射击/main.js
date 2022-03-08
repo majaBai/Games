@@ -10,16 +10,18 @@ function main () {
   window.level = 1 // 游戏关卡
   // 游戏所需的所有图片
   var allImgPath = { 
-    block: '../assets/block.png', 
-    ball: '../assets/ball.png', 
-    paddle: '../assets/paddle.png',
+    cloud: '../assets/cloud.png', 
+    bullet: '../assets/bullet.png', 
+    player: '../assets/player.png',
+    enemy: '../assets/enemy.png',
     bk: '../assets/sky.jpeg'
   }
   // g = new Game(allImgPath)
   g = Game.instance(allImgPath) // 单例
   g.ready = function() {
-    // const s = new SceneTitle(g)
-    const s = SceneTitle.new(g) // 初始化场景
+    console.log('g.ready')
+    const s = new SceneStart(g)
+    // const s = new SceneStart(g) // 初始化场景
     g.start(s)
   }
 }

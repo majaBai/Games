@@ -35,6 +35,7 @@ class Game {
 
   static instance (allImgPath) {
     const i = this.i || new this(allImgPath)
+    if(!this.i) this.i = i
     return i
   }
 
@@ -67,9 +68,15 @@ class Game {
   }
   drawScene () {
     this.scene.draw()
+    // console.log('game.drawScene', this.scene)
+    // this.drawBk()
+    // this.scene.elements.forEach(item => {
+    //   this.drawMaterial(item)
+    // })
   }
   drawMaterial (image) {
-    this.ctx.drawImage(image.img, image.x, image.y)
+    // console.log('drawMaterial', image)
+    this.ctx.drawImage(image.texture, image.x, image.y, image.w, image.h)
   }
   drawScore (scroe) {
     this.ctx.font = "16px serif";
@@ -84,7 +91,7 @@ class Game {
     this.ctx.fillText(text, this.canvas.width / 2, this.canvas.height / 2)
   }
   drawBk () {
-    const img = this.imgByName('bk').img
+    const img = this.textureByName('bk').img
     // this.ctx.createPattern(img, "no-repeat")
     this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height)
   }
@@ -97,12 +104,12 @@ class Game {
   replaceScene (s) {
     this.scene = s
   }
-  imgByName (name) {
+  textureByName (name) {
     let img = this.imgs[name]
     let image = {
       img,
-      w: img.width,
-      h: img.height
+      // w: img.width,
+      // h: img.height
     }
     return image
   }

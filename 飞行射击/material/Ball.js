@@ -1,6 +1,6 @@
 const Ball = function (g) {
     // let img = imgFromPath('../assets/ball.png')
-    let o = g.imgByName('ball')
+    let o = g.imgByName('bullet')
     // let o = {
     //   img,
     //   x: 150,

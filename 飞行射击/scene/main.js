@@ -1,9 +1,17 @@
 class Scene {
     constructor (g) {
       console.log('scene constructor')
+      this.game = g
+      this.elements = []
+    }
+    addElement (material) {
+      this.elements.push(material)
     }
     draw () {
-        alert('需要子类自己实现 draw 方法')
+      this.game.drawBk()
+      this.elements.forEach(item => {
+        this.game.drawMaterial(item)
+      })
     }
     update () {
 

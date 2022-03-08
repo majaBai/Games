@@ -1,6 +1,6 @@
 const Paddle = function (g) {
     // let img = imgFromPath('../assets/paddle.png')
-    let o = g.imgByName('paddle')
+    let o = g.imgByName('player')
     // let o = {
     //   img,
     //   x: 100,

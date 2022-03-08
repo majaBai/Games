@@ -2,7 +2,7 @@
 
   const Block = function (level, g) {
     // let img = imgFromPath('../assets/block.png')
-    let o = g.imgByName('block')
+    let o = g.imgByName('player')
     // let o = {
     //   img,
     //   x: level[0],
