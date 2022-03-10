@@ -14,7 +14,10 @@ class Scene {
       })
     }
     update () {
-
+      // console.log('main scene update')
+      this.elements.forEach(item => {
+        item.update()
+      })
     }
     // 改变初始化示例的调用方法
     // 静态方法

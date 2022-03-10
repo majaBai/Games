@@ -14,12 +14,14 @@ class SceneStart extends Scene {
   }
   init () {
     // 场景所需的素材
-    this.player = new Player({game:g, name: 'player', x: 170, y:700, factor:10, speed: 10})
-    this.cloud = new Cloud({game:g, name: 'cloud', x: 10, y:50, factor:20, speed: 2})
-    this.enemy = new Enemy({game:g, name: 'enemy', x: 10, y:50, factor:20, speed: 5})
+    this.player = new Player({game:g, name: 'player', x: 170, y:500, factor:10, speed: 10})
+    this.cloud = new Cloud({game:g, name: 'cloud', x: 10, y:50, factor:20, speed: 1})
+    this.enemy1 = new Enemy({game:g, name: 'enemy', x: 10, y:50, factor:20, speed: 5})
+    this.enemy2 = new Enemy({game:g, name: 'enemy', x: 80, y:150, factor:20, speed: 5})
     this.addElement(this.cloud)
     this.addElement(this.player)
-    this.addElement(this.enemy)
+    this.addElement(this.enemy1)
+    this.addElement(this.enemy2)
     // 注册按键事件
     g.register ('a', () => {
       this.player.moveLeft()
@@ -27,10 +29,19 @@ class SceneStart extends Scene {
     g.register ('d', () => {
       this.player.moveRight()
     })
+    g.register ('w', () => {
+      this.player.moveUp()
+    })
+    g.register ('s', () => {
+      this.player.moveDown()
+    })
+    g.register ('f', () => {
+      this.player.fire()
+    })
   }
-  update () {
-    this.cloud.y += 1
-  }
+  // update () {
+  //   // this.cloud.y += 1
+  // }
     // 注册按键事件
   //   g.register ('a', () => {
   //     this.paddle.moveLeft()
