@@ -20,8 +20,10 @@ class Player extends GameMaterial {
         this.y = this.y <= this.game.canvas.height - this.h? this.y : this.game.canvas.height - this.h
     }
     update () {
-        if (this.cooldown > 0) {
+        if (this.cooldown >= 0) {
             this.cooldown -= 1
+        } else {
+            this.cooldown = 3
         }
     }
     fire () {
