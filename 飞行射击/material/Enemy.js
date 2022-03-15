@@ -6,6 +6,14 @@ class Enemy extends GameMaterial {
         super(option)
     }
     update () {
-        // this.y += 1
+        this.y += this.speed
+        if (this.y >= this.game.canvas.height + this.h) {
+            this.y = -this.h / 2
+        }
     }
+    draw () {
+        this.game.drawMaterial(this)
+    }
+
+
 }

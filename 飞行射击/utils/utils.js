@@ -1,11 +1,11 @@
-var imgFromPath = function (path) {
+const imgFromPath = function (path) {
     let img = new Image()
     img.src = path
     return img
   }
 
   // 矩形相交
-  var rectIntersects = function (a, b) {
+const rectIntersects = function (a, b) {
     let [x1, y1] = [a.x, a.y]
     let [x2, y2] = [b.x, b.y]
     if (y1 + a.img.height < y2 || y2 + b.img.height < y1) return false
@@ -13,10 +13,14 @@ var imgFromPath = function (path) {
     return true
   }
 
-  var log = console.log.bind(console)
-  var e = sel => document.querySelector(sel)
-  // var log = function (s) {
-  //   const textArea = e("#log-area")
-  //   textArea.value += '\n' + s
-  // }
+const log = console.log.bind(console)
+const e = sel => document.querySelector(sel)
+// var log = function (s) {
+//   const textArea = e("#log-area")
+//   textArea.value += '\n' + s
+// }
 
+// 返回a, b 之间的随机数
+const randomBetween = function (a, b) {
+  return  a + (b - a) * Math.random(0, 1)
+}

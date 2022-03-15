@@ -4,7 +4,7 @@ class Player extends GameMaterial {
         option.factor= 10
         option.speed= config.player_speed
         super(option)
-        this.cooldown = 3
+        this.cooldown = 2
     }
     moveLeft () {
         this.x -= this.speed
@@ -27,8 +27,11 @@ class Player extends GameMaterial {
         if (this.cooldown >= 0) {
             this.cooldown -= 1
         } else {
-            this.cooldown = 3
+            this.cooldown = 2
         }
+    }
+    draw () {
+        this.game.drawMaterial(this)
     }
     fire () {
         if (this.cooldown === 0) {

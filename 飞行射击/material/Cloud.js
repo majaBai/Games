@@ -11,4 +11,7 @@ class Cloud extends GameMaterial {
             this.init()
         }
     }
+    draw () {
+        this.game.drawMaterial(this)
+    }
 }

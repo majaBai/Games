@@ -9,9 +9,10 @@ class Scene {
     draw () {
       this.game.drawBk()
       this.elements.forEach(item => {
-        this.game.drawMaterial(item)
+        // this.game.drawMaterial(item)
+        item.draw()
       })
-    }
+    } 
     update () {
       // console.log('main scene update')
       this.elements.forEach(item => {

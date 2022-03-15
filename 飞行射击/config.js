@@ -5,14 +5,16 @@ var allImgPath = {
   bullet: '../assets/bullet.png', 
   player: '../assets/player.png',
   enemy: '../assets/enemy.png',
-  bk: '../assets/sky.jpeg'
+  bk: '../assets/sky.jpeg',
+  fire: '../assets/bomb.png'
 }
 const config = {
     player_speed: 10,
     bullet_speed: 5,
     cloud_speed: 1,
-    enemy_speed: 5,
+    enemy_speed: 1,
     pause: false, // 暂停游戏
     fps: 40, // 帧率
-    level: 1 // 关卡
+    level: 1, // 关卡
+    fire_v: 0.01 // 爆炸火花加速度
   }

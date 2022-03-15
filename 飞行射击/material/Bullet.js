@@ -9,4 +9,7 @@ class Bullet extends GameMaterial {
       this.y -= this.speed
       this.speed = config.bullet_speed
   }
+  draw () {
+    this.game.drawMaterial(this)
+  }
 }
