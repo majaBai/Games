@@ -1,27 +1,20 @@
-// 改变小球速度
-function changeSpeed () {
-  let speed = document.querySelector('#speed-contrl').value
-  window.fps = Number(speed)
+// 改变速度
+function changeSpeed (event) {
+  const key = event.target.dataset.speed
+  const value = event.target.value
+  console.log('changeSpeed:::key: value', key, value) 
+  config[key] = Number(value)
 }
 
 function main () {
-  window.pause = false
-  window.fps = 30 // 小球速度
-  window.level = 1 // 游戏关卡
-  // 游戏所需的所有图片
-  var allImgPath = { 
-    cloud: '../assets/cloud.png', 
-    bullet: '../assets/bullet.png', 
-    player: '../assets/player.png',
-    enemy: '../assets/enemy.png',
-    bk: '../assets/sky.jpeg'
-  }
+  window.pause = config.pause
+  window.fps = config.fps
+  window.level = config.level
   // g = new Game(allImgPath)
-  g = Game.instance(allImgPath) // 单例
+  g = Game.instance(allImgPath)
   g.ready = function() {
-    console.log('g.ready')
     const s = new SceneStart(g)
-    // const s = new SceneStart(g) // 初始化场景
+    // const s = new SceneStart(g)
     g.start(s)
   }
 }

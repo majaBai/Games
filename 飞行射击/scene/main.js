@@ -1,6 +1,5 @@
 class Scene {
     constructor (g) {
-      console.log('scene constructor')
       this.game = g
       this.elements = []
     }

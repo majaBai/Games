@@ -1,5 +1,8 @@
 class Player extends GameMaterial {
     constructor(option) {
+        option.name= 'player'
+        option.factor= 10
+        option.speed= config.player_speed
         super(option)
         this.cooldown = 3
     }
@@ -20,6 +23,7 @@ class Player extends GameMaterial {
         this.y = this.y <= this.game.canvas.height - this.h? this.y : this.game.canvas.height - this.h
     }
     update () {
+        this.speed = config.player_speed
         if (this.cooldown >= 0) {
             this.cooldown -= 1
         } else {
@@ -28,7 +32,7 @@ class Player extends GameMaterial {
     }
     fire () {
         if (this.cooldown === 0) {
-            const b = new Bullet({game:this.game, name: 'bullet', x: this.x + this.w/2, y:this.y, factor:50, speed: 5})
+            const b = new Bullet({game:this.game, x: this.x + this.w/2, y:this.y})
             this.game.scene.addElement(b)
         }
     }

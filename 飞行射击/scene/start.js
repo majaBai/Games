@@ -14,14 +14,22 @@ class SceneStart extends Scene {
   }
   init () {
     // 场景所需的素材
-    this.player = new Player({game:g, name: 'player', x: 170, y:500, factor:10, speed: 10})
-    this.cloud = new Cloud({game:g, name: 'cloud', x: 10, y:50, factor:20, speed: 1})
-    this.enemy1 = new Enemy({game:g, name: 'enemy', x: 10, y:50, factor:20, speed: 5})
-    this.enemy2 = new Enemy({game:g, name: 'enemy', x: 80, y:150, factor:20, speed: 5})
+    this.player = new Player({game:g, x: 170, y:500})
+    this.cloud = new Cloud({game:g, x: 200, y:-290})
+    this.cloud1 = new Cloud({game:g, x: 20, y:-100})
+    this.enemy1 = new Enemy({game:g, x: 30, y:50})
+    this.enemy2 = new Enemy({game:g, x: 180, y: 150})
+    this.enemy3 = new Enemy({game:g, x: 100, y: 90})
+    this.enemy4 = new Enemy({game:g, x: 290, y: 20})
+    this.enemy5 = new Enemy({game:g, x: 350, y: 90})
     this.addElement(this.cloud)
+    this.addElement(this.cloud1)
     this.addElement(this.player)
     this.addElement(this.enemy1)
     this.addElement(this.enemy2)
+    this.addElement(this.enemy3)
+    this.addElement(this.enemy4)
+    this.addElement(this.enemy5)
     // 注册按键事件
     g.register ('a', () => {
       this.player.moveLeft()

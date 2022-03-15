@@ -15,6 +15,7 @@
 
   </style>
   <!-- 工具函数 -->
+  <script src="config.js"></script>
   <script src="utils/utils.js"></script>
   <!-- 游戏关卡 -->
   <script src="material/level.js"></script>
@@ -33,16 +34,13 @@
 </head>
 <body>
   <canvas id="canvas" width="400" height="700"></canvas>
-  <!-- <div>
-    球速调节：<input type="range" value='20' min='10' max='60' onmousemove="changeSpeed()" id="speed-contrl">
-    <p>
-      球速 1-60， 默认20
-    </p>
-  </div> -->
-  <h3>
-    游戏说明： 
-  </h3>
-  <!-- <p>开始发球: 按键 f<br>左移挡板: 按键 a ；<br>右移挡板: 按键 d；<br>暂停游戏：空格键</p> -->
+  <div>
+    玩家速度：<input type="range" value='10' min='10' max='60' data-speed="player_speed" onchange="changeSpeed(event)">
+  </div>
+  <div>
+    子弹速度：<input type="range" value='5' min='5' max='60' data-speed="bullet_speed" onchange="changeSpeed(event)">
+  </div>
+ 
  
 
   <!-- 自定义console.log -->
