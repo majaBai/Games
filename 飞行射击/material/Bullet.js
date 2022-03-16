@@ -17,14 +17,13 @@ class Bullet extends GameMaterial {
   }
   checkCollide (idx) {
     const item = this
-    const enemy = this.game.scene.elements.filter(e => e.option.name === "enemy")
+    const enemy = this.game.scene.elements.filter(e => e.name === "enemy")
     for(let i = 0; i < enemy.length; i++) {
         if (rectIntersects(enemy[i], item)) {
             this.killed = true
             break
         }
     }
-    console.log('bullet check colllide', this.killed)
     if (item.killed) {
         item.game.scene.removeElement(idx)
     }

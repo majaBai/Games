@@ -14,7 +14,4 @@ class Cloud extends GameMaterial {
     draw () {
         this.game.drawMaterial(this)
     }
-    checkCollide (item, idx, allElement) {
-    
-    }
 }

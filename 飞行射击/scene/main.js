@@ -14,7 +14,6 @@ class Scene {
           break
         }
       }
-      console.log('removeElement', idx)
       this.elements.splice(idx, 1)
     }
     removeElementById (idx) {
