@@ -20,32 +20,32 @@ class SceneStart extends Scene {
     this.enemy10 = new Enemy({game:g, x: 210, y: 220})
     this.addElement(this.cloud)
     this.addElement(this.cloud1)
-    this.addPlayer(this.player)
-    this.addEnemy(this.enemy1)
-    this.addEnemy(this.enemy2)
-    this.addEnemy(this.enemy3)
-    this.addEnemy(this.enemy4)
-    this.addEnemy(this.enemy5)
-    this.addEnemy(this.enemy6)
-    this.addEnemy(this.enemy7)
-    this.addEnemy(this.enemy8)
-    this.addEnemy(this.enemy9)
-    this.addEnemy(this.enemy10)
+    this.addElement(this.player)
+    this.addElement(this.enemy1)
+    this.addElement(this.enemy2)
+    this.addElement(this.enemy3)
+    this.addElement(this.enemy4)
+    this.addElement(this.enemy5)
+    this.addElement(this.enemy6)
+    this.addElement(this.enemy7)
+    this.addElement(this.enemy8)
+    this.addElement(this.enemy9)
+    this.addElement(this.enemy10)
     // 注册按键事件
     g.register ('a', () => {
-      this.player && this.player.moveLeft()
+      this.player.moveLeft()
     })
     g.register ('d', () => {
-      this.player && this.player.moveRight()
+      this.player.moveRight()
     })
     g.register ('w', () => {
-      this.player && this.player.moveUp()
+      this.player.moveUp()
     })
     g.register ('s', () => {
-      this.player && this.player.moveDown()
+      this.player.moveDown()
     })
     g.register ('f', () => {
-      this.player && this.player.fire()
+      this.player.fire()
     })
   }
 }

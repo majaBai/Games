@@ -7,7 +7,6 @@ class Game {
     this.ctx= this.canvas.getContext('2d')
     this.scene = null
     this.i = null // 实例，唯一
-    this.result = ''
      // events
     document.addEventListener('keydown', event => {
       this.keydowns[event.key] = true

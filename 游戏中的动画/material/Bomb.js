@@ -12,8 +12,6 @@ class Bomb extends GameMaterial {
     draw () {
       if(this.duration > 0) {
         this.game.drawMaterial(this)
-      } else {
-          this.death = 'yes'
       }
     }
   }

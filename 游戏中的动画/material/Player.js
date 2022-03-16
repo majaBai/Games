@@ -23,8 +23,8 @@ class Player extends GameMaterial {
         this.y += this.speed
         this.y = this.y <= this.game.canvas.height - this.h? this.y : this.game.canvas.height - this.h
     }
-    update () {
-        this.checkCollide()
+    update (idx) {
+        this.checkCollide(idx)
         if (this.killed) return
         this.speed = config.player_speed
     }
@@ -36,11 +36,11 @@ class Player extends GameMaterial {
         if (this.lastFireTime && now - this.lastFireTime < 300) return
         this.lastFireTime = now
         const b = new Bullet({game:this.game, x: this.x + this.w/2, y:this.y})
-        this.game.scene.addBullets(b)
+        this.game.scene.addElement(b)
     }
-    checkCollide () {
+    checkCollide (idx) {
         const item = this
-        const enemy = this.game.scene.enemy
+        const enemy = this.game.scene.elements.filter(e => e.option.name === "enemy")
         for(let i = 0; i < enemy.length; i++) {
             if (rectIntersects(enemy[i], item)) {
                 this.killed = true
@@ -48,8 +48,7 @@ class Player extends GameMaterial {
             }
         }
         if (item.killed) {
-            item.game.scene.removePlayer() // 玩家阵亡
-            item.game.result = 'fail'
+            item.game.scene.removeElement(idx) // 玩家阵亡
             const x = item.x 
             const y = item.y
             const bomb = new Bomb({game:item.game, x: x - item.w/2, y: y - item.h / 2, factor: 5 })
@@ -57,7 +56,7 @@ class Player extends GameMaterial {
             setTimeout(() => {
                 const end = new SceneEnd({g: item.game, text:'game over, press r restart!'})
                 item.game.replaceScene(end)
-            }, 500)
+            }, 1000)
         }
     }
 }

@@ -17,23 +17,23 @@ class Enemy extends GameMaterial {
     }
     checkCollide (idx) {
         const item = this
-        const bullets = this.game.scene.bullets
+        const bullets = this.game.scene.elements.filter(e => e.option.name === "bullet")
         let ruined_bullet
         for(let i = 0; i < bullets.length; i++) {
             if (rectIntersects(bullets[i], item)) {
                 this.killed = true
-                ruined_bullet = i
+                ruined_bullet = bullets[i]
                 break
             }
         }
         if (item.killed) {
-            item.game.scene.removeEnemy(idx) // 移除敌机
-            item.game.scene.removeBullets(ruined_bullet) // 移除子弹
+            item.game.scene.removeElementById(idx) // 移除敌机
+            item.game.scene.removeElement(ruined_bullet) // 移除敌机
             const x = item.x 
             const y = item.y
             const bomb = new Bomb({game:item.game, x, y})
             item.game.scene.addElement(bomb)
-            if (item.game.scene.enemy.length === 0 ) {
+            if (item.game.scene.elements.filter(item => item.name === 'enemy').length === 0 ) {
                 setTimeout(()=> {
                     const end = new SceneEnd({g: item.game, text:'Win!! press r restart'})
                     item.game.replaceScene(end)

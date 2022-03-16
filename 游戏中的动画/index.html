@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飞行射击游戏</title>
+  <style>
+
+
+
+    #canvas {
+      border: 1px solid gray;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+  <!-- 工具函数 -->
+  <script src="config.js"></script>
+  <script src="utils/utils.js"></script>
+  <!-- 游戏关卡 -->
+  <script src="material/level.js"></script>
+  <!-- 游戏及元素相关文件 -->
+  <script src="material/game.js"></script>
+  <script src="material/GameMaterial.js"></script>
+  <script src="material/Bomb.js"></script>
+  <script src="material/particleSystem.js"></script>
+  <script src="material/Bullet.js"></script>
+  <script src="material/Player.js"></script>
+  <script src="material/Cloud.js"></script>
+  <script src="material/Enemy.js"></script>
+  <!-- 游戏场景 -->
+  <script src="scene/main.js"></script>
+  <script src="scene/title.js"></script>
+  <script src="scene/end.js"></script>
+  <script src="scene/start.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="700"></canvas>
+
+  <div class='desc hidden'>
+    <div>
+      <p>游戏说明：</p>
+      <p>上下左右键：w,s,a,d</p>
+      <p>开火：f</p>
+    </div>
+    <div>
+      玩家速度：<input type="range" value='10' min='10' max='60' data-speed="player_speed" onchange="changeSpeed(event)">
+    </div>
+    <div>
+      子弹速度：<input type="range" value='5' min='5' max='60' data-speed="bullet_speed" onchange="changeSpeed(event)">
+    </div>
+  </div>
+
+  
+ 
+
+  <!-- 自定义console.log -->
+  <!-- <textarea name="" id="log-area" cols="30" rows="10"></textarea> -->
+ 
+  <script>
+    
+  </script>
+  <!-- 程序入口 -->
+  <script src='./main.js'></script>
+</body>
+</html>
