@@ -1,12 +1,3 @@
-// function loadBlocks() {
-//   let l = window.level
-//   let blocks = []
-//   for (let i = 0; i < Level[l - 1].length; i++) {
-//     let b = Block(Level[l - 1][i], g)
-//     blocks.push(b)
-//   }
-//   return blocks
-// }
 class SceneStart extends Scene {
   constructor (g) {
     super(g)
@@ -17,11 +8,16 @@ class SceneStart extends Scene {
     this.player = new Player({game:g, x: 170, y:500})
     this.cloud = new Cloud({game:g, x: 200, y:-290})
     this.cloud1 = new Cloud({game:g, x: 20, y:-100})
-    this.enemy1 = new Enemy({game:g, x: 30, y:50})
+    this.enemy1 = new Enemy({game:g, x: 30, y: -50})
     this.enemy2 = new Enemy({game:g, x: 180, y: 150})
-    this.enemy3 = new Enemy({game:g, x: 100, y: 90})
+    this.enemy3 = new Enemy({game:g, x: 100, y:-190})
     this.enemy4 = new Enemy({game:g, x: 290, y: 20})
-    this.enemy5 = new Enemy({game:g, x: 350, y: 90})
+    this.enemy5 = new Enemy({game:g, x: 350, y: -390})
+    this.enemy6 = new Enemy({game:g, x: 60, y: -10})
+    this.enemy7 = new Enemy({game:g, x: 240, y: -120})
+    this.enemy8 = new Enemy({game:g, x: 50, y: 180})
+    this.enemy9 = new Enemy({game:g, x: 120, y: -200})
+    this.enemy10 = new Enemy({game:g, x: 210, y: 220})
     this.addElement(this.cloud)
     this.addElement(this.cloud1)
     this.addElement(this.player)
@@ -30,6 +26,11 @@ class SceneStart extends Scene {
     this.addElement(this.enemy3)
     this.addElement(this.enemy4)
     this.addElement(this.enemy5)
+    this.addElement(this.enemy6)
+    this.addElement(this.enemy7)
+    this.addElement(this.enemy8)
+    this.addElement(this.enemy9)
+    this.addElement(this.enemy10)
     // 注册按键事件
     g.register ('a', () => {
       this.player.moveLeft()
@@ -47,72 +48,4 @@ class SceneStart extends Scene {
       this.player.fire()
     })
   }
-  // update () {
-  //   // this.cloud.y += 1
-  // }
-    // 注册按键事件
-  //   g.register ('a', () => {
-  //     this.paddle.moveLeft()
-  //   })
-  //   g.register ('d', () => {
-  //     this.paddle.moveRight()
-  //   })
-  //   g.register ('f', () => {
-  //     this.ball.fire()
-  //   })
-  //   window.addEventListener('keydown', event => {
-  //     // 暂停游戏
-  //     if (event.code === 'Space') {
-  //       window.pause = !window.pause
-  //       log('window.pause', window.pause)
-  //     }
-  //     // 更换关卡
-  //     if('123'.includes(event.key)) {
-  //       window.level = Number(event.key)
-  //       this.blocks = loadBlocks()
-  //     }
-  //   })
-  //    // 拖拽小球
-  //    let canDragBall = false
-  //   g.canvas.addEventListener('mousedown', e => {
-  //      let x = e.offsetX
-  //      let y = e.offsetY
-  //      if (this.ball.hasPoint(x, y)) {
-  //        canDragBall = true
-  //      }
-  //    })
-  //   g.canvas.addEventListener('mousemove', e => {
-  //      let x = e.offsetX
-  //      let y = e.offsetY
-  //      if (canDragBall) {
-  //        this.ball.x = x
-  //        this.ball.y = y
-  //        g.shiftBall()
-  //      }
-  //    })
-  //   g.canvas.addEventListener('mouseup', function(e) {
-  //      canDragBall = false
-  //    })
-  // }
-
-  // update () {
-  //   if (this.ball.y > this.paddle.y) {
-  //     const s = new SceneEnd(g)
-  //     g.replaceScene(s)
-  //      return
-  //   }
-  //   if (this.paddle.collide(this.ball)) {
-  //       this.ball.rebound()
-  //   }
-  //   for (let i = 0; i < this.blocks.length; i++) {
-  //   let b = this.blocks[i]
-  //   if(b.collide(this.ball)) {
-  //       b.killed()
-  //       this.score += 100
-  //       this.ball.rebound()
-  //   }
-  //   }
-  //   this.ball.move()
-  // }
-  
 }

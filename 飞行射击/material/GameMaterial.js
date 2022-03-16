@@ -7,6 +7,7 @@ class GameMaterial {
     init() {
       this.game = this.option.game
       this.texture = this.game.textureByName(this.option.name).img
+      this.name = this.option.name
       this.x = this.option.x
       this.y = this.option.y
       this.w = this.texture.width/(this.option.factor || 1)// 由于找的图片不合适，太大，故缩小

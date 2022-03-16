@@ -6,7 +6,8 @@ var allImgPath = {
   player: '../assets/player.png',
   enemy: '../assets/enemy.png',
   bk: '../assets/sky.jpeg',
-  fire: '../assets/bomb.png'
+  fire: '../assets/bomb.png',
+  bomb: '../assets/bomb.png'
 }
 const config = {
     player_speed: 10,

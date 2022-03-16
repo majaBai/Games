@@ -23,6 +23,8 @@ class Particle extends GameMaterial {
       //   this.system.restart()
       // }
     }
+    checkCollide (item, idx, allElement) {
+  }
   }
   class particleSystem {
     constructor(game, x, y) {
