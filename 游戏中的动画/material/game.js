@@ -75,7 +75,6 @@ class Game {
     // })
   }
   drawMaterial (image) {
-    // console.log('drawMaterial', image)
     this.ctx.drawImage(image.texture, image.x, image.y, image.w, image.h)
   }
   drawScore (scroe) {

@@ -5,8 +5,16 @@ class SceneTitle extends Scene {
       this.init(g)
     }
     init (g) {
-      const animation = new WolkingAnimation({game: g, x: 80, y: 20})
-      this.addElement(animation)
+      const walker = new WolkingAnimation({game: g, x: 80, y: 20})
+      this.addElement(walker)
+
+      this.walker = walker
+      g.register ('a', () => {
+        this.walker.move(-2)
+      })
+      g.register ('d', () => {
+        this.walker.move(2)
+      })
     }
     draw () {
       // g.drawBk()
