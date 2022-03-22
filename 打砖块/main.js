@@ -10,10 +10,10 @@ function main () {
   window.level = 1 // 游戏关卡
   // 游戏所需的所有图片
   var allImgPath = { 
-    block: '../assets/block.png', 
-    ball: '../assets/ball.png', 
-    paddle: '../assets/paddle.png',
-    bk: '../assets/bk.png'
+    block: '../assets/hit-block/block.png', 
+    ball: '../assets/hit-block/ball.png', 
+    paddle: '../assets/hit-block/paddle.png',
+    bk: '../assets/hit-block/bk.png'
   }
   // g = new Game(allImgPath)
   g = Game.instance(allImgPath) // 单例

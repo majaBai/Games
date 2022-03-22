@@ -5,7 +5,7 @@ class SceneTitle extends Scene {
       this.init(g)
     }
     init (g) {
-      const walker = new WolkingAnimation({game: g, x: 80, y: 20})
+      const walker = new WolkingAnimation({game: g, x: 80, y: 20, scale: 0.3, framesCount: 96})
       this.addElement(walker)
 
       this.walker = walker

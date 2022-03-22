@@ -11,7 +11,7 @@ class MyAnimation {
       this.frames = []
       this.framesCount = option.framesCount
       for(let i = 0; i < this.framesCount; i++) {
-          const f = this.game.textureByName(`w${i}`).img
+          const f = this.game.textureByName(`${option.img_path}${i}`).img
           this.frames.push(f)
       }
       this.curIndx = 0

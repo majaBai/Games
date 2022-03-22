@@ -1,9 +1,9 @@
 // 配置文件
 // 游戏所需的所有图片
-function loadAnimation(count, path) {
+function loadAnimation(count, path, k) {
   let o = {}
   for(let i = 0; i < count; i++) {
-    let key = `w${i}`
+    let key = `${k}${i}`
     let value = path.replace('${i}', i)
     o[key] = value
   }
@@ -14,10 +14,12 @@ var allImgPath = {
   bullet: '../assets/shoot-plane/bullet.png', 
   player: '../assets/shoot-plane/player.png',
   enemy: '../assets/shoot-plane/enemy.png',
-  bk: '../assets/shoot-plane/sky.jpeg',
+  bk: '../assets/birds/bird-sky.png',
   fire: '../assets/shoot-plane/bomb.png',
   bomb: '../assets/shoot-plane/bomb.png',
-  ...loadAnimation(96, '../assets/walkings/walking-${i}.png')
+  g0: '../assets/birds/g0.png',
+  g1: '../assets/birds/g1.png',
+  ...loadAnimation(7, '../assets/birds/images/b${i}.png', 'b'),
 }
 const config = {
     player_speed: 10,
