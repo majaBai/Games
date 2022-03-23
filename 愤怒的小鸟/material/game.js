@@ -1,7 +1,9 @@
 class Game {
   constructor (allImgPath) {
-    this.actions = {},
+    this.keydown_actions = {},
+    this.keyup_actions = {},
     this.keydowns = {},
+    this.keyups = {},
     this.imgs= {},
     this.canvas= document.querySelector('#canvas'),
     this.ctx= this.canvas.getContext('2d')
@@ -10,9 +12,11 @@ class Game {
      // events
     document.addEventListener('keydown', event => {
       this.keydowns[event.key] = true
+      this.keyups[event.key] = false
     })
     document.addEventListener('keyup', event => {
       this.keydowns[event.key] = false
+      this.keyups[event.key] = true
     })
      // 预载入图片
     var imgCount = 0
@@ -46,10 +50,16 @@ class Game {
   runLoop () {
     if (!window.pause) {
       // events
-      let keys = Object.keys(g.actions)
-      keys.forEach(k => {
+      let keys_down = Object.keys(g.keydown_actions)
+      keys_down.forEach(k => {
         if (this.keydowns[k]) {
-          this.actions[k]()
+          this.keydown_actions[k]()
+        }
+      })
+      let keys_up = Object.keys(g.keyup_actions)
+      keys_up.forEach(k => {
+        if (this.keyups[k]) {
+          this.keyup_actions[k]()
         }
       })
       // clear
@@ -63,8 +73,9 @@ class Game {
       this.runLoop()
     }, 1000 / window.fps)
   }
-  register (key, cb) {
-    this.actions[key] = cb
+  register (key, cb, isDown = true) {
+    if (isDown) this.keydown_actions[key] = cb
+    else this.keyup_actions[key] = cb
   }
   drawScene () {
     this.scene.draw()
