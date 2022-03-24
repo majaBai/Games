@@ -11,12 +11,12 @@ class Game {
     this.i = null // 实例，唯一
      // events
     document.addEventListener('keydown', event => {
-      this.keydowns[event.key] = true
-      this.keyups[event.key] = false
+      this.keydowns[event.key] = 'down'
+      // this.keyups[event.key] = false
     })
     document.addEventListener('keyup', event => {
-      this.keydowns[event.key] = false
-      this.keyups[event.key] = true
+      this.keydowns[event.key] = 'up'
+      // this.keyups[event.key] = true
     })
      // 预载入图片
     var imgCount = 0
@@ -52,16 +52,21 @@ class Game {
       // events
       let keys_down = Object.keys(g.keydown_actions)
       keys_down.forEach(k => {
-        if (this.keydowns[k]) {
-          this.keydown_actions[k]()
+        const status = this.keydowns[k]
+        if (status === 'down') {
+          this.keydown_actions[k]('down')
+        } else if (status === 'up') {
+          this.keydown_actions[k]('up')
+          this.keydowns[k] = null
         }
       })
-      let keys_up = Object.keys(g.keyup_actions)
-      keys_up.forEach(k => {
-        if (this.keyups[k]) {
-          this.keyup_actions[k]()
-        }
-      })
+      // let keys_up = Object.keys(g.keyup_actions)
+      // keys_up.forEach(k => {
+      //   if (this.keyups[k]) {
+      //     this.keyup_actions[k]()
+      //     this.keyups[k] = false
+      //   }
+      // })
       // clear
       this.clear()
       // update

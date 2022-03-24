@@ -15,38 +15,24 @@ class SceneTitle extends Scene {
       this.addElement(bird)
 
       this.bird = bird
-      g.register ('a', () => {
-        this.bird.move('x', -2)
+      g.register ('a', (s) => {
+        //  s表示按键的按下与否的状态，up/down
+        this.bird.move('x', -2, s)
       })
-      g.register ('a', () => {
-        console.log('aaa up----')
-        this.bird.startfall()
-      }, false) // keyup
-      g.register ('d', () => {
-        this.bird.move('x', 2)
+      g.register ('d', (s) => {
+        this.bird.move('x', 2, s)
       })
-      g.register ('d', () => {
-        this.bird.startfall()
-      }, false) // keyup
-      g.register ('w', () => {
-        this.bird.move('y', -2)
+      // g.register ('w', (s) => {
+      //   this.bird.move('y', -2, s)
+      // })
+      // g.register ('s', (s) => {
+      //   this.bird.move('y', 2, s)
+      // })
+      g.register ('j', (s) => {
+        this.bird.jump(s)
       })
-      g.register ('w', () => {
-        this.bird.startfall()
-      }, false) // keyup
-      g.register ('s', () => {
-        this.bird.move('y', 2)
-      })
-      g.register ('j', () => {
-        this.bird.jump()
-      })
-      g.register ('j', () => {
-        this.bird.startfall()
-      }, false) // keyup
     }
     draw () {
-      // g.drawBk()
-      // g.drawTip('按 k 开始游戏')
       super.draw()
     }
     update () {
