@@ -9,13 +9,13 @@ class SceneTitle extends Scene {
       const g0 = new Ground({game: g, x: -10, y: 600, framesCount: 1, img_path: 'g'})
       const g1 = new Ground({game: g, x: 325, y: 600, framesCount: 1, img_path: 'g'})
       const g2 = new Ground({game: g, x: 625, y: 600, framesCount: 2, img_path: 'g'})
-      const p0 = new Pipe({game: g,  x: 250, y: 400, framesCount: 1, img_path: 'p'})
-      const p1 = new Pipe({game: g,  x: 500, y: 400, framesCount: 1, img_path: 'p'})
+      const pipe = new Pipe({game: g,  scale: 0.6, framesCount: 3, img_path: 'p'})
+      // const p1 = new Pipe({game: g,  x: 500, y: 0, scale: 0.6, framesCount: 1, img_path: 'p'})
+      this.addElement(pipe)
       this.addElement(g0)
       this.addElement(g1)
       this.addElement(g2)
-      this.addElement(p0)
-      this.addElement(p1)
+      // this.addElement(p1)
       this.addElement(bird)
 
       this.bird = bird

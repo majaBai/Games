@@ -23,20 +23,18 @@ class BirdsAnimation extends MyAnimation {
     move(num, status) {
         this.fall = status === 'up'
         this.rotation = 0
-        console.log('status', status,  this.fall)
         this.flip = num < 0
         this.x += num
         if (this.x > this.game.canvas.width - this.w ) this.x = this.game.canvas.width - this.w
         if (this.x < -this.w / 3) this.x = -this.w / 3
     }
     jump (status) {
-        // this.fall = status === 'up'
+        this.fall = status === 'up'
         this.rotation = status === 'up' ? 0 : -45
         this.y -= 15
         if (this.y < 0) this.y = 0
     }
     update () {
-        console.log('update this.fall', this.fall)
         if (this.fall) {
             this.y += this.vy
             this.vy += 0.5

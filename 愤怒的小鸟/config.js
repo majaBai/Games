@@ -22,6 +22,8 @@ var allImgPath = {
   g2: '../assets/birds/g2.png',
   p0: '../assets/birds/p0.png',
   p1: '../assets/birds/p1.png',
+  // p2: '../assets/birds/p2.png',
+  // p3: '../assets/birds/p3.png',
   ...loadAnimation(7, '../assets/birds/images/b${i}.png', 'b'),
 }
 const config = {
