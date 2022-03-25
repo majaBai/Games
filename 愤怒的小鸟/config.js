@@ -20,6 +20,8 @@ var allImgPath = {
   g0: '../assets/birds/g0.png',
   g1: '../assets/birds/g1.png',
   g2: '../assets/birds/g2.png',
+  p0: '../assets/birds/p0.png',
+  p1: '../assets/birds/p1.png',
   ...loadAnimation(7, '../assets/birds/images/b${i}.png', 'b'),
 }
 const config = {
