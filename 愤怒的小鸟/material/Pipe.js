@@ -5,6 +5,7 @@ class Pipe {
   }
   init (option) {
     this.game = option.game
+    this.name = option.name
     this.scale = option.scale || 1 // 控制图片大小
     this.down_x = option.x
     this.down_y = option.y
