@@ -9,7 +9,8 @@ class Pipe {
     this.scale = option.scale || 1 // 控制图片大小
     this.down_x = option.x
     this.down_y = option.y
-    this.split = 150
+    this.split = 200 // 上下管子间距
+    this.space = 200 // 左右管子间距
     this.frames = []
     this.framesCount = option.framesCount
     for(let i = 0; i < this.framesCount; i += 1) {
@@ -18,9 +19,9 @@ class Pipe {
       const w = p_down.width * this.scale
       const h = p_down.height * this.scale
 
-      const x = 250 + i * 100
-      const down_y = 0
-      const up_y = this.split + h
+      const x = 250 + this.space * i
+      const down_y = randomBetween(-100, 0)
+      const up_y = down_y + h + this.split
 
       const obj = {down: p_down, up: p_up, x, down_y, up_y, w, h}
       this.frames.push(obj)
@@ -37,7 +38,7 @@ class Pipe {
       for (let i = 0; i < this.frames.length; i++) {
         let pipes = this.frames[i]
         pipes.x -= config.pipe_speed.value
-        if (pipes.x < -100 * i - pipes.w) pipes.x = this.game.canvas.width + 100 * (i + 1)
+        if (pipes.x < -100) pipes.x += this.space * this.frames.length
       }
   }
 }

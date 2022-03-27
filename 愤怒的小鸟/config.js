@@ -37,7 +37,7 @@ const config = {
     // fire_v: 0.01, // 爆炸火花加速度
     bird_speed: {
       label: '小鸟飞行速度',
-      value: 0.5
+      value: 1
     },
     jump_height:  {
       label: '小鸟跳跃高度',
@@ -45,10 +45,10 @@ const config = {
     },
     pipe_speed:  {
       label: '管子移动速度',
-      value: 1
+      value: 2
     },
     groud_speed: {
       label: '地面移动速度',
-      value: 1
+      value: 2
     }
   }
