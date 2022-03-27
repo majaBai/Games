@@ -18,7 +18,7 @@ class BirdsAnimation extends MyAnimation {
         ctx.translate(this.x + w2, this.y + h2)
         if (this.flip) ctx.scale(-1, 1)
         ctx.rotate(this.rotation * Math.PI/180)
-        ctx.translate(-w2, -h2)
+        ctx.translate(-w2 - 50, -h2 - 50) // 移动到原有的坐标处，减50是因为期间鸟一直在飞，原有的 x 已经变化
         ctx.drawImage(this.texture, 0, 0)
         ctx.restore()
         if (this.checkCollide()) {
