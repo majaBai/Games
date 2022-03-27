@@ -4,10 +4,11 @@ class BirdsAnimation extends MyAnimation {
       option.name= 'bird'
       super(option)
       this.flip = false
-      this.vy = 0.5
+      this.vy = 0.1
       this.fall = true
       this.rotation = 0
       this.lowest_height = 470 // 触地高度
+      this.jumpHeight = config.jump_height.value
     }
     draw () {
         const ctx =  this.game.ctx
@@ -28,14 +29,14 @@ class BirdsAnimation extends MyAnimation {
         this.fall = status === 'up'
         this.rotation = 0
         this.flip = num < 0
-        this.x += num
+        this.x += ( num < 0 ? -config.bird_speed.value : config.bird_speed.value)
         if (this.x > this.game.canvas.width - this.w ) this.x = this.game.canvas.width - this.w
         if (this.x < -this.w / 3) this.x = -this.w / 3
     }
     jump (status) {
         this.fall = status === 'up'
         this.rotation = status === 'up' ? 0 : -45
-        this.y -= 15
+        this.y -= this.jumpHeight
         if (this.y < 0) this.y = 0
     }
     checkCollide () {
@@ -58,10 +59,10 @@ class BirdsAnimation extends MyAnimation {
     update () {
         if (this.fall) {
             this.y += this.vy
-            this.vy += 0.5
+            this.vy += 0.1
             if (this.rotation < 45) this.rotation = this.rotation + 5 <= 45 ? this.rotation + 5 : 45
         } else {
-            this.vy = 0.5
+            this.vy = 0.1
         }
         if (this.y >= this.lowest_height) this.y = this.lowest_height
         if (this.y <= 0) this.y = 0

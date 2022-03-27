@@ -10,7 +10,6 @@ class Pipe {
     this.down_x = option.x
     this.down_y = option.y
     this.split = 150
-    this.speed = 2
     this.frames = []
     this.framesCount = option.framesCount
     for(let i = 0; i < this.framesCount; i += 1) {
@@ -37,7 +36,7 @@ class Pipe {
   update () {
       for (let i = 0; i < this.frames.length; i++) {
         let pipes = this.frames[i]
-        pipes.x -= this.speed
+        pipes.x -= config.pipe_speed.value
         if (pipes.x < -100 * i - pipes.w) pipes.x = this.game.canvas.width + 100 * (i + 1)
       }
   }

@@ -21,10 +21,10 @@ class SceneTitle extends Scene {
       this.bird = bird
       g.register ('a', (s) => {
         //  s表示按键的按下与否的状态，up/down
-        this.bird.move(-2, s)
+        this.bird.move(-1, s)
       })
       g.register ('d', (s) => {
-        this.bird.move(2, s)
+        this.bird.move(1, s)
       })
       g.register ('j', (s) => {
         this.bird.jump(s)

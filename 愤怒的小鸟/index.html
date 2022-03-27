@@ -45,26 +45,14 @@
 <body>
   <canvas id="canvas" width="400" height="700"></canvas>
 
-  <div class='desc hidden'>
+  <div class='desc'>
     <div>
       <p>游戏说明：</p>
-      <p>上下左右键：w,s,a,d</p>
-      <p>开火：f</p>
+      <p>左右移动小鸟：a, d 键</p>
+      <p>跳跃：j 键</p>
     </div>
-    <div>
-      玩家速度：<input type="range" value='10' min='10' max='60' data-speed="player_speed" onchange="changeSpeed(event)">
-    </div>
-    <div>
-      子弹速度：<input type="range" value='5' min='5' max='60' data-speed="bullet_speed" onchange="changeSpeed(event)">
-    </div>
+    <div id="config"></div>
   </div>
-
-  
- 
-
-  <!-- 自定义console.log -->
-  <!-- <textarea name="" id="log-area" cols="30" rows="10"></textarea> -->
- 
   <script>
     
   </script>

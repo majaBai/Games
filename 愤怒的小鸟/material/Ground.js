@@ -11,7 +11,7 @@ class Ground extends MyAnimation {
     update () {
         this.curIndx = (this.curIndx + 1) % this.framesCount
         this.texture = this.frames[this.curIndx]
-        this.x -= 2
+        this.x -= config.groud_speed.value
         if (this.x < -this.w) this.x = this.game.canvas.width
     }
   }

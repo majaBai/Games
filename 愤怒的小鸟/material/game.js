@@ -12,11 +12,9 @@ class Game {
      // events
     document.addEventListener('keydown', event => {
       this.keydowns[event.key] = 'down'
-      // this.keyups[event.key] = false
     })
     document.addEventListener('keyup', event => {
       this.keydowns[event.key] = 'up'
-      // this.keyups[event.key] = true
     })
      // 预载入图片
     var imgCount = 0
@@ -60,13 +58,6 @@ class Game {
           this.keydowns[k] = null
         }
       })
-      // let keys_up = Object.keys(g.keyup_actions)
-      // keys_up.forEach(k => {
-      //   if (this.keyups[k]) {
-      //     this.keyup_actions[k]()
-      //     this.keyups[k] = false
-      //   }
-      // })
       // clear
       this.clear()
       // update
