@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏里的动画</title>
+  <style>
+    #canvas {
+      border: 1px solid gray;
+    }
+    button {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+  <script src="function/canvas_scale.js"></script>
+  <script src="function/canvas_flip.js"></script>
+  <script src="function/canvas_translate.js"></script>
+  <script src="function/canvas_rotate.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="500"></canvas>
+  <button onclick="translateToRight()">translate to right bottom</button>
+  <button onclick="flipBetweenLeftRight()">flip</button>
+  <button onclick="scale()">scale</button>
+  <button onclick="rotateUp()">rotate</button>
+  <script src="main.js"></script>
+</html>
