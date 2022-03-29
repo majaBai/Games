@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>马里奥--提取图片</title>
+</head>
+<body>
+  <input type="file" id="fileInput" onchange="selectFile(this)">
+  <canvas id="canvas" width="640" height="640"></canvas>
+
+
+  <script>
+    /*
+    1个图块： 8 * 8 像素
+    1个像素： 2 bits
+    => 个图块：8 * 8 * 2 = 128 bits = 16 bytes
+    
+    8 * 8 的图块宽高就是 64 * 64 像素， canvas 宽高放大10倍，以便画出来看的清楚
+    
+    */ 
+    const e = selector => document.querySelector(selector)
+    const log = console.log.bind(console)
+
+    const selectFile = input => {
+      console.log('file', input.files)
+      let f = input.files[0]
+      let filereader = new FileReader()
+      filereader.readAsArrayBuffer(f)
+      filereader.onloadend = function () {
+        let bytes = new Uint8Array(filereader.result)
+        console.log('bytes', bytes)
+
+      }
+    }
+    
+    const main = () => {
+      
+    }
+
+    main()
+  </script>
+
+</body>
+</html>
