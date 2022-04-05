@@ -8,20 +8,71 @@
 </head>
 <body>
   <input type="file" id="fileInput" onchange="selectFile(this)">
+  <h3 class="bit-offset"></h3>
+  <div class="controler">
+    <button data-offset="1024" data-action="changeOffset">+1024</button>
+    <button data-offset="-1024" data-action="changeOffset">-1024</button>
+  </div>
   <canvas id="canvas" width="640" height="640"></canvas>
 
 
   <script>
     /*
+    nes 文件是二进制问价，图片保存在数据之中，以一个一个的方块存储
     1个图块： 8 * 8 像素
-    1个像素： 2 bits
-    => 个图块：8 * 8 * 2 = 128 bits = 16 bytes
+    1像素： 2 bits (可以有4种颜色)
+    => 1个图块：16字节（8 * 8 * 2 = 128 bits = 16 bytes）
     
-    8 * 8 的图块宽高就是 64 * 64 像素， canvas 宽高放大10倍，以便画出来看的清楚
+   每页 8 * 8 的图块
+   宽高 64 * 64 像素， canvas 宽高放大10倍，以便画出来看的清楚
     
     */ 
     const e = selector => document.querySelector(selector)
     const log = console.log.bind(console)
+
+    const drawBlock = (context, data, x , y, pixelWidth) => {
+      const colors = ['white', '#fe1000', '#ffb010', '#aa3030']
+      let w = pixelWidth
+      let h = pixelWidth
+      for (let i = 0; i < 8; i++) {
+        let p1 = data[i]
+        let p2 = data[i + 8]
+        for (let j = 0; j < 8; j++) {
+           // 8 bits per line
+           // 78 79 0100 1110 0100 0101
+           // 在 j 循环中每次画一个像素点
+           let c1 = (p1 >> (7 - j)) & 0b00000001
+           let c2 = (p2 >> (7 - j )) & 0b00000001
+           let pixel = (c2 << 1) + c1
+           let color = colors[pixel]
+           context.fillStyle = color
+           let px = x + j * w
+           let py = y + i * h
+           context.fillRect(px, py, w, h)
+        }
+      }
+    }
+
+    const drawNes = bytes => {
+      // 78 69
+      // 0100 1110 0100 0101
+      let canvas = e ('#canvas')
+      let context = canvas.getContext('2d')
+
+      let blockSize = 8 // 一个图块 8 像素
+      let pixelSize = 8
+      let pixelWidth = 10
+      let numberOfBytesPerBlock = 16
+
+      for (let i = 0; i < blockSize; i++) {
+        for (let j = 0; j < blockSize; j++) {
+          let x = j * pixelSize * pixelWidth
+          let y = i * pixelSize * pixelWidth
+          let index = window.offset +  (i * 8 + j) * numberOfBytesPerBlock
+          drawBlock(context, bytes.slice(index), x, y, pixelWidth)
+        }
+      }
+    }
 
     const selectFile = input => {
       console.log('file', input.files)
@@ -29,14 +80,33 @@
       let filereader = new FileReader()
       filereader.readAsArrayBuffer(f)
       filereader.onloadend = function () {
-        let bytes = new Uint8Array(filereader.result)
+        window.bytes = new Uint8Array(filereader.result)
         console.log('bytes', bytes)
-
+        drawNes(window.bytes)
       }
+    }
+
+    const actions = {
+      changeOffset (offset) {
+        window.offset += offset
+        e('.bit-offset').innerHTML = window.offset
+        drawNes(window.bytes)
+      }
+
+    }
+
+    const bindEvents = () => {
+      e('.controler').addEventListener('click', event => {
+        let target = event.target
+        let action = target.dataset.action
+        let offset = Number(target.dataset.offset)
+        actions[action] && actions[action](offset)
+      })
     }
     
     const main = () => {
-      
+      window.offset = 16384 // 测试而得，从这儿开始有马里奥图片
+      bindEvents()
     }
 
     main()
