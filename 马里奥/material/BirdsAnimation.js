@@ -9,7 +9,6 @@ class BirdsAnimation extends MyAnimation {
       this.rotation = 0
       this.lowest_height = 470 // 触地高度
       this.jumpHeight = config.jump_height.value
-      this.killed = false
     }
     draw () {
         const ctx =  this.game.ctx
@@ -23,16 +22,7 @@ class BirdsAnimation extends MyAnimation {
         ctx.drawImage(this.texture, 0, 0)
         ctx.restore()
         if (this.checkCollide()) {
-           this.game.drawTip('oh...killed..')
-           this.killed = true
-           setTimeout(() => {
-            const endScene = new SceneEnd(this.game)
-            this.game.replaceScene(endScene)
-
-            const gameTip = document.querySelector('.desc')
-             gameTip.classList.add('hidden')
-           }, 600)
-           
+            this.game.drawTip('磕到了，好痛啊～')
         }
     }
     move(num, status) {
@@ -67,7 +57,6 @@ class BirdsAnimation extends MyAnimation {
         return r
     }
     update () {
-        if (this.killed) return
         if (this.fall) {
             this.y += this.vy
             this.vy += 0.1

@@ -1,13 +1,13 @@
 // 配置文件
 // 游戏所需的所有图片
 var allImgPath = { 
-  cloud: '../assets/cloud.png', 
-  bullet: '../assets/bullet.png', 
-  player: '../assets/player.png',
-  enemy: '../assets/enemy.png',
-  bk: '../assets/sky.jpeg',
-  fire: '../assets/bomb.png',
-  bomb: '../assets/bomb.png'
+  cloud: '../assets/shoot-plane/cloud.png', 
+  bullet: '../assets/shoot-plane/bullet.png', 
+  player: '../assets/shoot-plane/player.png',
+  enemy: '../assets/shoot-plane/enemy.png',
+  bk: '../assets/shoot-plane/sky.jpeg',
+  fire: '../assets/shoot-plane/bomb.png',
+  bomb: '../assets/shoot-plane/bomb.png'
 }
 const config = {
     player_speed: 10,

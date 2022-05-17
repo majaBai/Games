@@ -90,11 +90,11 @@ class Game {
     this.ctx.textAlign = 'center'
     this.ctx.fillText(scroe, 50, this.canvas.height - 20)
   }
-  drawTip (text,color = 'white', x = this.canvas.width / 2, y = this.canvas.height / 2) {
+  drawTip (text) {
     this.ctx.font = "bold 32px serif";
-    this.ctx.fillStyle = color
+    this.ctx.fillStyle = 'white'
     this.ctx.textAlign = 'center'
-    this.ctx.fillText(text, x, y)
+    this.ctx.fillText(text, this.canvas.width / 2, this.canvas.height / 2)
   }
   drawBk () {
     const img = this.textureByName('bk').img
@@ -118,5 +118,13 @@ class Game {
       // h: img.height
     }
     return image
+  }
+  // 拖拽小球
+  shiftBall () {
+    this.clear()
+    // update
+    this.update()
+    // draw
+    this.drawScene()
   }
 }

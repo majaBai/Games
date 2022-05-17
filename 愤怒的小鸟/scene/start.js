@@ -1,51 +1,39 @@
+
 class SceneStart extends Scene {
-  constructor (g) {
+  constructor(g) {
     super(g)
-    this.init()
+    this.init(g)
   }
-  init () {
-    // 场景所需的素材
-    this.player = new Player({game:g, x: 170, y:500})
-    this.cloud = new Cloud({game:g, x: 200, y:-290})
-    this.cloud1 = new Cloud({game:g, x: 20, y:-100})
-    this.enemy1 = new Enemy({game:g, x: 30, y: -50})
-    this.enemy2 = new Enemy({game:g, x: 180, y: 150})
-    this.enemy3 = new Enemy({game:g, x: 100, y:-190})
-    this.enemy4 = new Enemy({game:g, x: 290, y: 20})
-    this.enemy5 = new Enemy({game:g, x: 350, y: -90})
-    this.enemy6 = new Enemy({game:g, x: 60, y: -10})
-    this.enemy7 = new Enemy({game:g, x: 240, y: -120})
-    this.enemy8 = new Enemy({game:g, x: 50, y: 180})
-    this.enemy9 = new Enemy({game:g, x: 120, y: 80})
-    this.enemy10 = new Enemy({game:g, x: 210, y: 220})
-    this.addElement(this.cloud)
-    this.addElement(this.cloud1)
-    this.addElement(this.player)
-    this.addElement(this.enemy1)
-    this.addElement(this.enemy2)
-    this.addElement(this.enemy3)
-    this.addElement(this.enemy4)
-    this.addElement(this.enemy5)
-    this.addElement(this.enemy6)
-    this.addElement(this.enemy7)
-    this.addElement(this.enemy8)
-    this.addElement(this.enemy9)
-    this.addElement(this.enemy10)
-    // 注册按键事件
-    g.register ('a', () => {
-      this.player.moveLeft()
+  init (g) {
+    const bird = new BirdsAnimation({game: g, x: 20, y: 200, scale: 0.5, framesCount: 7, img_path: 'b'})
+    const g0 = new Ground({game: g, x: -10, y: 600, framesCount: 1, img_path: 'g'})
+    const g1 = new Ground({game: g, x: 325, y: 600, framesCount: 1, img_path: 'g'})
+    const g2 = new Ground({game: g, x: 625, y: 600, framesCount: 2, img_path: 'g'})
+    const pipe = new Pipe({game: g,  scale: 0.6, framesCount: 3, img_path: 'p'})
+    // const p1 = new Pipe({game: g,  x: 500, y: 0, scale: 0.6, framesCount: 1, img_path: 'p'})
+    this.addElement(pipe)
+    this.addElement(g0)
+    this.addElement(g1)
+    this.addElement(g2)
+    // this.addElement(p1)
+    this.addElement(bird)
+
+    this.bird = bird
+    g.register ('a', (s) => {
+      //  s表示按键的按下与否的状态，up/down
+      this.bird.move(-1, s)
     })
-    g.register ('d', () => {
-      this.player.moveRight()
+    g.register ('d', (s) => {
+      this.bird.move(1, s)
     })
-    g.register ('w', () => {
-      this.player.moveUp()
+    g.register ('j', (s) => {
+      this.bird.jump(s)
     })
-    g.register ('s', () => {
-      this.player.moveDown()
-    })
-    g.register ('f', () => {
-      this.player.fire()
-    })
+  }
+  draw () {
+    super.draw()
+  }
+  update () {
+    super.update()
   }
 }

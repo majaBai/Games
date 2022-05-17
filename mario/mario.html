@@ -16,7 +16,7 @@
     <button data-offset="-1024" data-action="changeOffset">-1024</button>
   </div>
   <canvas id="canvas" width="640" height="640"></canvas>
-
+  <canvas id="mario" width="160" height="320"></canvas>
 
   <script>
     /*
@@ -32,7 +32,8 @@
     const e = selector => document.querySelector(selector)
     const log = console.log.bind(console)
 
-    const drawBlock = (context, data, x , y, pixelWidth) => {
+    const drawBlock = (context, data, x , y, pixelWidth, i, j) => {
+      console.log('draw block data:::', data)
       const colors = ['white', '#fe1000', '#ffb010', '#aa3030']
       let w = pixelWidth
       let h = pixelWidth
@@ -51,6 +52,10 @@
            let px = x + j * w
            let py = y + i * h
            context.fillRect(px, py, w, h)
+          //  context.font = "12px white serif";
+          //  context.fillStyle = 'black'
+          //  console.warn('i : j', i , j)
+          //  context.fillText(i, j, px, py)
         }
       }
     }
@@ -71,11 +76,31 @@
           let x = j * pixelSize * pixelWidth
           let y = i * pixelSize * pixelWidth
           let index = window.offset +  (i * 8 + j) * numberOfBytesPerBlock
-          drawBlock(context, bytes.slice(index), x, y, pixelWidth)
+          drawBlock(context, bytes.slice(index), x, y, pixelWidth, i, j)
         }
       }
     }
+    
+    const drawSprite = bytes => {
+      console.warn('!!! sprite data!!!!', bytes)
+      let canvas = e ('#mario')
+      let context = canvas.getContext('2d')
 
+      let pixelPerBlock = 8
+      let pixelWidth = 10
+      let blockSize = pixelPerBlock * pixelWidth
+      let offset = 10
+
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 2; j++) {
+          let x = j * blockSize
+          let y = i * blockSize
+          let data = bytes.slice(offset)
+          drawBlock(context, data, x, y, pixelWidth)
+          offset += 16
+        }
+      }
+    }
     const selectFile = input => {
       console.log('file', input.files)
       let f = input.files[0]
@@ -85,6 +110,8 @@
         window.bytes = new Uint8Array(filereader.result)
         console.log('bytes', bytes)
         drawNes(window.bytes)
+        
+        drawSprite(window.bytes.slice(window.offset))
       }
     }
 
@@ -93,6 +120,7 @@
         window.offset += offset
         e('.bit-offset').innerHTML = window.offset
         drawNes(window.bytes)
+        drawSprite(window.bytes.slice(window.offset))
       }
 
     }
@@ -107,7 +135,7 @@
     }
     
     const main = () => {
-      window.offset = 16384 // 测试而得，从这儿开始有马里奥图片
+      window.offset = 16400 // 测试而得，从这儿开始有马里奥图片
       bindEvents()
     }
 

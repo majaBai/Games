@@ -29,6 +29,8 @@ function main () {
   g = Game.instance(allImgPath)
   g.ready = function() {
     const s = new SceneTitle(g)
+    // const s = new SceneStart(g)
+    // const s = new SceneStart(g)
     g.start(s)
   }
 }

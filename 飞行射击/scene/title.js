@@ -27,7 +27,7 @@ class SceneTitle extends Scene {
     }
     init (g) {
       // 示例: 添加一个任意类型的 element
-      const example = new Example(this.game, 'press k start game!')
+      const example = new Example(this.game, 'press k to start game!')
       this.addElement(example)
 
       const ps = new particleSystem(g, 20, 100)

@@ -5,33 +5,18 @@ class SceneTitle extends Scene {
       this.init(g)
     }
     init (g) {
-      const bird = new BirdsAnimation({game: g, x: 20, y: 200, scale: 0.5, framesCount: 7, img_path: 'b'})
-      const g0 = new Ground({game: g, x: -10, y: 600, framesCount: 1, img_path: 'g'})
-      const g1 = new Ground({game: g, x: 325, y: 600, framesCount: 1, img_path: 'g'})
-      const g2 = new Ground({game: g, x: 625, y: 600, framesCount: 2, img_path: 'g'})
-      const pipe = new Pipe({game: g,  scale: 0.6, framesCount: 3, img_path: 'p'})
-      // const p1 = new Pipe({game: g,  x: 500, y: 0, scale: 0.6, framesCount: 1, img_path: 'p'})
-      this.addElement(pipe)
-      this.addElement(g0)
-      this.addElement(g1)
-      this.addElement(g2)
-      // this.addElement(p1)
-      this.addElement(bird)
+      g.register ('k', () => {
+        const startScene = new SceneStart(g)
+        this.game.replaceScene(startScene)
 
-      this.bird = bird
-      g.register ('a', (s) => {
-        //  s表示按键的按下与否的状态，up/down
-        this.bird.move(-1, s)
-      })
-      g.register ('d', (s) => {
-        this.bird.move(1, s)
-      })
-      g.register ('j', (s) => {
-        this.bird.jump(s)
+        const gameTip = document.querySelector('.desc')
+        gameTip.classList.remove('hidden')
       })
     }
     draw () {
-      super.draw()
+      // super.draw()
+      this.game.drawBk()
+      this.game.drawTip('Press k to start game!', 'yellow', this.game.canvas.width / 2, this.game.canvas.height / 4)
     }
     update () {
       super.update()
